@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}	
+<h2 align="center"> <font color="red"> SiPM {{serial}} </font></h2>
+<h3 align="center"> Crystal Position <txt id="sipmnum"> {{num}}</txt></h3>
+<br>
+Last <input id="howManyHours" size=5></input> hours
+<div id="plot" style="width: 50em; height: 30em; margin: 0"></div>
+<script type="text/javascript" charset="utf-8" src="{{url_for('static', filename='singlesipm.js')}}">
+</script>
+Current gain setting: <b id="gainSetting"></b><br>
+<br>
+New setting: <input type=text id="newSetting" size="2"></input>
+<br><br>
+{% if num > 0 %}
+	<a href="{{url_for('sipm_graph_next', sipm_num=num-1, next_str='prev')}}">prev</a>
+{% endif %}
+{% if num < 53 %}
+	<a href="{{url_for('sipm_graph_next', sipm_num=num+1, next_str='next')}}">next</a>
+{% endif %}
+{% endblock body %}

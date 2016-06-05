@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SLAC2016 Analysis Status">
+    <meta name="author" content="Kim Siang Khaw">
+
+    <title>SLAC2016 Analysis Status</title>
+
+    <!-- Socket.IO -->
+    <!--<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>-->
+    <script type="text/javascript" src="/static/socket.io.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap.css" rel="stylesheet">
+    <!-- jQuery -->
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    <script type="text/javascript" src="/static/jquery-1.11.2.min.js"></script>
+    <!-- Custom -->
+    <script type="text/javascript" charset="utf-8" src="/static/update.js"></script>
+    <!-- Sparkline -->
+    <script type="text/javascript" src="/static/jquery.sparkline.min.js"></script>
+    <!-- jgPlot -->
+    <link class="include" rel="stylesheet" type="text/css" href="/static/jquery.jqplot.min.css" />
+    <script type="text/javascript" src="/static/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="/static/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="/static/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="/static/jqplot.dateAxisRenderer.min.js"></script>
+</head>
+
+<body>
+<div id="wrap">
+    <div class="container">
+        <div class="page-header"><h1><b>SLAC2016 Analysisometer </b></h1></div>
+	<h3><font color="black">Latest Midas file</font></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <!-- midas data file status -->
+                    {% for midas_num in midas_file_nums %}
+                    <tr>
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Midas file</h3></td>-->
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Midas file {{midas_num}}</h3></td>-->
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label1"~midas_num}} class="label"></span></h4></td>
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_status1"~midas_num}} class="label"></span></h4></td>
+                    <!--<td width="30%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label3"~midas_num}} class="label"></span></h4></td>-->
+                    </tr>
+                    {% endfor %}
+                </table>
+          </div>
+        </div>
+
+   	<h3><font color="black">Current running data cruncher </font></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <!-- running proc status -->
+                    {% for proc_num in proc_nums %}
+                    <tr>
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Log file {{log_num}}</h3></td>-->
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label5"~proc_num}} class="label"></span></h4></td>
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_status5"~proc_num}} class="label"></span></h4></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+          </div>
+        </div>
+
+
+ 
+   	<h3><font color="black">Latest cruncher log file</font></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <!-- log file status -->
+                    {% for log_num in log_file_nums %}
+                    <tr>
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Log file {{log_num}}</h3></td>-->
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label4"~log_num}} class="label"></span></h4></td>
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_status4"~log_num}} class="label"></span></h4></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+          </div>
+        </div>
+
+
+   	<h3><font color="black">Latest Art file</font></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <!-- art data file status -->
+                    {% for art_num in art_file_nums %}
+                    <tr>
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Art file</h3></td> -->
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Art file {{analysis_num}}</h3></td>-->
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label2"~art_num}} class="label"></span></h4></td>
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_status2"~art_num}} class="label"></span></h4></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+          </div>
+        </div>
+
+   	<h3><font color="black">Latest Analysis file</font></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <!-- analysis data file status -->
+                    {% for analysis_num in analysis_file_nums %}
+                    <tr>
+                    <!--<td width="40%" style="vertical-align:middle;"><h3>Analysis file {{analysis_num}}</h3></td>-->
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_label3"~analysis_num}} class="label"></span></h4></td>
+                    <td width="40%" style="vertical-align:middle;"><h4>&nbsp;<span id={{"file_status3"~analysis_num}} class="label"></span></h4></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+          </div>
+        </div>
+
+   </div>
+    <div class="footer">
+        <small><p class="text-center">Muon g-2 Experiment, SLAC T-536</p></small>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+$(document).ready(function() {
+	var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+	socket.on('get status', function(msg) {
+		//		for (var i = 1; i <= msg.num; ++i) {
+		    // var sensorId = '#riderSensor'.concat(i.toString());
+		    // console.log(sensorId);
+		    var i = msg.num;
+		    if (msg.stat == '1000') {
+			$('#rider_label'.concat(i.toString())).text("Ready");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-success');
+		    } else if (msg.stat == '1100') {
+			$('#rider_label'.concat(i.toString())).text("Error");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-danger');
+		    } else if (msg.stat == '0000' | msg.stat == '1111') {
+			$('#rider_label'.concat(i.toString())).text("Disconnected");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-default');
+		    } else if (msg.stat == '0010') {
+			$('#rider_label'.concat(i.toString())).text("Sync Lost");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-warning');
+		    } else if (msg.stat == '0001') {
+			$('#rider_label'.concat(i.toString())).text("Overflow Warning");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-warning');
+		    } else {
+			$('#rider_label'.concat(i.toString())).text("Unknown");
+			$('#rider_label'.concat(i.toString())).removeClass('').addClass('label-info');
+		    }
+		    //}
+	    });
+    });
